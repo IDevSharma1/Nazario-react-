@@ -1,5 +1,6 @@
 // /src/components/Navbar.jsx
 import React from 'react';
+import { Link } from "react-router-dom";
 
 function Navbar({ brand = 'Nazario' }) {
   return (
@@ -21,7 +22,9 @@ function Navbar({ brand = 'Nazario' }) {
               <li className="nav-item"><a className="nav-link" href="#" style={{ color: 'var(--Creme-Brulee)' }}>Men</a></li>
               <li className="nav-item"><a className="nav-link" href="#" style={{ color: 'var(--Creme-Brulee)' }}>Women</a></li>
               <li className="nav-item"><a className="nav-link" href="#" style={{ color: 'var(--Creme-Brulee)' }}>Accessories</a></li>
-              <li className="nav-item"><a className="nav-link fw-semibold" href="#" style={{ color: 'var(--Au-Lait)' }}>Sale</a></li>
+              <li className="nav-item"><a className="nav-link fw-semibold" href="#" style={{ color: 'var(--Au-Lait)' }} >Sale</a></li>
+              <li className="nav-item"><Link className="nav-link fw-semibold" to="/faq" style={{ color: 'var(--Au-Lait)' }}>FAQ</Link></li>
+
             </ul>
 
             <form className="d-none d-md-flex align-items-center position-relative me-2" role="search" style={{ minWidth: 280 }}>
@@ -53,3 +56,7 @@ function Navbar({ brand = 'Nazario' }) {
 }
 
 export default React.memo(Navbar);
+
+
+
+
