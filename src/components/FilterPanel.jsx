@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 
 function FilterPanel({ open, onClose, onApply, onClear, filters, setFilters }) {
   useEffect(() => {
-    if (open) { document.body.style.overflow = 'hidden'; return () => { document.body.style.overflow = ''; }; }
+    if (open) {
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = ''; };
+    }
   }, [open]);
 
   const toggleArrayValue = (key, value) => {
@@ -13,6 +16,14 @@ function FilterPanel({ open, onClose, onApply, onClear, filters, setFilters }) {
     });
   };
 
+  // Price range: allow only one selection
+  const selectPriceRange = (label) => {
+    setFilters(prev => ({
+      ...prev,
+      priceRanges: prev.priceRanges?.[0] === label ? [] : [label]
+    }));
+  };
+
   return (
     <>
       <div className={`filter-overlay ${open ? 'show' : ''}`} onClick={onClose} aria-hidden={open ? 'false' : 'true'} />
@@ -21,7 +32,10 @@ function FilterPanel({ open, onClose, onApply, onClear, filters, setFilters }) {
           <div id="filterTitle" className="fw-bold">Filters</div>
           <button className="btn btn-link text-decoration-none" type="button" onClick={onClear}>Clear all</button>
         </div>
+
         <div className="filter-body">
+
+          {/* FRAME TYPE */}
           <section className="border-bottom pb-2 mb-2">
             <button className="btn w-100 text-start py-2" type="button" data-bs-toggle="collapse" data-bs-target="#accType" aria-expanded="true">FRAME TYPE</button>
             <div id="accType" className="collapse show">
@@ -34,7 +48,8 @@ function FilterPanel({ open, onClose, onApply, onClear, filters, setFilters }) {
                   const selected = filters.type?.includes(val);
                   return (
                     <div className="col" key={val}>
-                      <label className={`tile w-100 ${selected ? 'selected':''}`} onClick={() => toggleArrayValue('type', val)}
+                      <label className={`tile w-100 ${selected ? 'selected':''}`}
+                             onClick={()=>toggleArrayValue('type', val)}
                              role="checkbox" aria-checked={selected ? 'true':'false'} tabIndex={0}
                              onKeyDown={(e)=> e.key==='Enter' && toggleArrayValue('type', val)}>
                         <img src={img} alt={val} /><span>{val}</span>
@@ -46,6 +61,7 @@ function FilterPanel({ open, onClose, onApply, onClear, filters, setFilters }) {
             </div>
           </section>
 
+          {/* PRICE */}
           <section className="border-bottom pb-2 mb-2">
             <button className="btn w-100 text-start py-2" type="button" data-bs-toggle="collapse" data-bs-target="#accPrice" aria-expanded="true">PRICE</button>
             <div id="accPrice" className="collapse show">
@@ -54,8 +70,8 @@ function FilterPanel({ open, onClose, onApply, onClear, filters, setFilters }) {
                   const selected = filters.priceRanges?.includes(label);
                   return (
                     <span key={label} className={`chip ${selected?'selected':''}`} role="checkbox" aria-checked={selected?'true':'false'} tabIndex={0}
-                          onClick={()=>toggleArrayValue('priceRanges', label)}
-                          onKeyDown={(e)=> e.key==='Enter' && toggleArrayValue('priceRanges', label)}>{label}</span>
+                          onClick={()=>selectPriceRange(label)}
+                          onKeyDown={(e)=> e.key==='Enter' && selectPriceRange(label)}>{label}</span>
                   );
                 })}
               </div>
@@ -69,6 +85,7 @@ function FilterPanel({ open, onClose, onApply, onClear, filters, setFilters }) {
             </div>
           </section>
 
+          {/* BRANDS */}
           <section className="border-bottom pb-2 mb-2">
             <button className="btn w-100 text-start py-2" type="button" data-bs-toggle="collapse" data-bs-target="#accBrand">BRANDS</button>
             <div id="accBrand" className="collapse">
@@ -89,67 +106,29 @@ function FilterPanel({ open, onClose, onApply, onClear, filters, setFilters }) {
             </div>
           </section>
 
+          {/* FRAME SHAPE */}
+          <section className="border-bottom pb-2 mb-2">
+            <button className="btn w-100 text-start py-2" type="button" data-bs-toggle="collapse" data-bs-target="#accShape">FRAME SHAPE</button>
+            <div id="accShape" className="collapse">
+              <div className="row g-2 row-cols-3 row-cols-md-4">
+                {['Square','Rectangle','Round','Cat Eye','Geometric','Aviator','Wayfarer','Oval'].map(shape=>{
+                  const selected = filters.shape?.includes(shape);
+                  return (
+                    <div className="col" key={shape}>
+                      <label className={`tile w-100 ${selected?'selected':''}`}
+                             onClick={()=>toggleArrayValue('shape', shape)}
+                             role="checkbox" aria-checked={selected?'true':'false'} tabIndex={0}
+                             onKeyDown={(e)=> e.key==='Enter' && toggleArrayValue('shape', shape)}>
+                        <span>{shape}</span>
+                      </label>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
           
-<section className="border-bottom pb-2 mb-2">
-  <button className="btn w-100 text-start py-2" type="button" data-bs-toggle="collapse" data-bs-target="#accType" aria-expanded="true">
-    FRAME TYPE
-  </button>
-  <div id="accType" className="collapse show">
-    <div className="row g-2 row-cols-3">
-      {[
-        { val:'Full Rim', img:'https://static.lenskart.com/images/cust_mailer/Eyeglass/FullRim.png' },
-        { val:'Rimless', img:'https://static.lenskart.com/images/cust_mailer/Eyeglass/Rimless.png' },
-        { val:'Half Rim', img:'https://static.lenskart.com/images/cust_mailer/Eyeglass/HalfRim.png' },
-      ].map(({ val, img }) => {
-        const selected = filters.type?.includes(val);
-        return (
-          <div className="col" key={val}>
-            <label className={`tile w-100 ${selected ? 'selected':''}`}
-                   onClick={()=>toggleArrayValue('type', val)}
-                   role="checkbox" aria-checked={selected ? 'true':'false'} tabIndex={0}
-                   onKeyDown={(e)=> e.key==='Enter' && toggleArrayValue('type', val)}>
-              <img src={img} alt={val} /><span>{val}</span>
-            </label>
-          </div>
-        );
-      })}
-    </div>
-  </div>
-</section>
-
-{/* FRAME SHAPE (tiles) */}
-<section className="border-bottom pb-2 mb-2">
-  <button className="btn w-100 text-start py-2" type="button" data-bs-toggle="collapse" data-bs-target="#accShape" aria-expanded="false">
-    FRAME SHAPE
-  </button>
-  <div id="accShape" className="collapse">
-    <div className="row g-2 row-cols-3 row-cols-md-4">
-      {[
-        { val:'Square', img:'https://static.lenskart.com/images/cust_mailer/Eyeglass/Square.png' },
-        { val:'Rectangle', img:'https://static.lenskart.com/images/cust_mailer/Eyeglass/Rectangle.png' },
-        { val:'Round', img:'https://static.lenskart.com/images/cust_mailer/Eyeglass/Round.png' },
-        { val:'Cat Eye', img:'https://static.lenskart.com/images/cust_mailer/Eyeglass/CatEye.png' },
-        { val:'Geometric', img:'https://static.lenskart.com/images/cust_mailer/Eyeglass/Geometric.png' },
-        { val:'Aviator', img:'https://static.lenskart.com/images/cust_mailer/Eyeglass/Aviator.png' },
-        { val:'Wayfarer', img:'https://static1.lenskart.com/media/desktop/img/Dec20/app/Shape/Wayfarer.png' },
-        { val:'Oval', img:'https://static1.lenskart.com/media/desktop/img/Dec20/app/Shape/Oval.png' },
-      ].map(({ val, img }) => {
-        const selected = filters.shape?.includes(val);
-        return (
-          <div className="col" key={val}>
-            <label className={`tile w-100 ${selected ? 'selected':''}`}
-                   onClick={()=>toggleArrayValue('shape', val)}
-                   role="checkbox" aria-checked={selected ? 'true':'false'} tabIndex={0}
-                   onKeyDown={(e)=> e.key==='Enter' && toggleArrayValue('shape', val)}>
-              <img src={img} alt={val} /><span>{val}</span>
-            </label>
-          </div>
-        );
-      })}
-    </div>
-  </div>
-</section>
-
 {/* FRAME COLOR (list) */}
 <section className="border-bottom pb-2 mb-2">
   <button className="btn w-100 text-start py-2" type="button" data-bs-toggle="collapse" data-bs-target="#accColor">FRAME COLOR</button>
@@ -170,29 +149,6 @@ function FilterPanel({ open, onClose, onApply, onClear, filters, setFilters }) {
   </div>
 </section>
 
-{/* PRICE (chips + inputs) */}
-<section className="border-bottom pb-2 mb-2">
-  <button className="btn w-100 text-start py-2" type="button" data-bs-toggle="collapse" data-bs-target="#accPrice" aria-expanded="true">PRICE</button>
-  <div id="accPrice" className="collapse show">
-    <div className="chips" role="group" aria-label="Price ranges">
-      {['Under ₹999','₹1000–1999','₹2000–2999','₹3000–4999','₹5000+'].map(label=>{
-        const selected = filters.priceRanges?.includes(label);
-        return (
-          <span key={label} className={`chip ${selected?'selected':''}`} role="checkbox" aria-checked={selected?'true':'false'} tabIndex={0}
-                onClick={()=>toggleArrayValue('priceRanges', label)}
-                onKeyDown={(e)=> e.key==='Enter' && toggleArrayValue('priceRanges', label)}>{label}</span>
-        );
-      })}
-    </div>
-    <div className="d-flex align-items-center gap-2 mt-2">
-      <input type="number" className="input-mini" placeholder="Min" aria-label="Min price"
-             value={filters.priceMin ?? ''} onChange={(e)=> setFilters(p=>({...p, priceMin:e.target.value}))}/>
-      <span className="text-secondary">to</span>
-      <input type="number" className="input-mini" placeholder="Max" aria-label="Max price"
-             value={filters.priceMax ?? ''} onChange={(e)=> setFilters(p=>({...p, priceMax:e.target.value}))}/>
-    </div>
-  </div>
-</section>
 
 {/* FRAME SIZE (chips) */}
 <section className="border-bottom pb-2 mb-2">
@@ -340,7 +296,9 @@ function FilterPanel({ open, onClose, onApply, onClear, filters, setFilters }) {
 </section>
       
 
+
         </div>
+
         <div className="filter-footer">
           <button className="btn btn-outline-secondary flex-fill" onClick={onClose}>Close</button>
           <button className="btn btn-buynow flex-fill" onClick={onApply}>Apply Filters</button>
@@ -351,3 +309,6 @@ function FilterPanel({ open, onClose, onApply, onClear, filters, setFilters }) {
 }
 
 export default React.memo(FilterPanel);
+
+
+
