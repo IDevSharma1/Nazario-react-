@@ -7,75 +7,85 @@ function ProductCard({ product, onToggleLike }) {
 
   return (
     <div 
-  className="card border-0 d-flex flex-column h-100" 
-  style={{ minHeight: "450px" }}
->
-  {/* Image Section */}
-  <div 
-    className="img-wrap card-prod position-relative" 
-    style={{ height: "300px", overflow: "hidden" }} 
-  >
-    <img
-      src={image}
-      alt={name}
-      loading="lazy"
-      className="w-100 h-100 d-block"
-      style={{ objectFit: "cover" }} // 🔥 fills the wrapper
-    />
-
-    {/* Badges */}
-    <div className="position-absolute top-0 start-0 p-2 d-flex flex-column gap-1">
-      {badges?.map((b) => {
-        const promo = /%|Sale/i.test(b);
-        const style = { background: promo ? 'var(--Inkwell)' : 'var(--Au-Lait)' };
-        return (
-          <span key={b} className="badge-chip" style={style}>
-            {b}
-          </span>
-        );
-      })}
-    </div>
-
-    {/* Like Button */}
-    <button
-      className="btn p-0 position-absolute"
-      style={{
-        top: 8,
-        right: 8,
-        width: 32,
-        height: 32,
-        borderRadius: '50%',
-        background: 'rgba(255,255,255,.7)',
-      }}
-      aria-label={liked ? 'Unlike' : 'Like'}
-      onClick={handleLike}
+      className="card border-0 d-flex flex-column h-100" 
+      style={{ minHeight: "450px" }}
     >
-      {liked ? (
-        <i className="bi bi-heart-fill text-danger" />
-      ) : (
-        <i className="bi bi-heart" style={{ color: 'var(--Inkwell)' }} />
-      )}
-    </button>
-  </div>
+      {/* Image Section */}
+      <a 
+        href="../pages/product-details.html"
+        style={{ display: "block", height: "300px", overflow: "hidden", borderRadius: "8px", position: "relative" }}
+        tabIndex={0}
+        aria-label={`View details for ${name}`}
+      >
+        <img
+          src={image}
+          alt={name}
+          loading="lazy"
+          className="w-100 h-100"
+          style={{ objectFit: "cover" }}
+        />
 
+        {/* Badges */}
+        <div className="position-absolute top-0 start-0 p-2 d-flex flex-column gap-1">
+          {badges?.map((b) => {
+            const promo = /%|Sale/i.test(b);
+            const style = { background: promo ? 'var(--Inkwell)' : 'var(--Au-Lait)' };
+            return (
+              <span key={b} className="badge-chip" style={style}>
+                {b}
+              </span>
+            );
+          })}
+        </div>
 
-
+        {/* Like Button */}
+        <button
+          className="btn p-0 position-absolute"
+          style={{
+            top: 8,
+            right: 8,
+            width: 32,
+            height: 32,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,.7)',
+          }}
+          aria-label={liked ? 'Unlike' : 'Like'}
+          onClick={e => {
+            e.preventDefault();
+            handleLike();
+          }}
+          type="button"
+        >
+          {liked ? (
+            <i className="bi bi-heart-fill text-danger" />
+          ) : (
+            <i className="bi bi-heart" style={{ color: 'var(--Inkwell)' }} />
+          )}
+        </button>
+      </a>
 
       {/* Card Body */}
       <div className="pt-2 pb-2 px-2 d-flex flex-column flex-grow-1">
-        <h3 
-          className="fs-6 fw-semibold" 
-          title={name}
-          style={{ 
-            display: '-webkit-box', 
-            WebkitLineClamp: 2, 
-            WebkitBoxOrient: 'vertical', 
-            overflow: 'hidden', 
-            minHeight: "40px" // 🔥 keeps all titles aligned
-          }}
+        <a 
+          href="../pages/product-details.html"
+          style={{ textDecoration: "none", color: "inherit" }}
+          tabIndex={0}
+          aria-label={`View details for ${name}`}
         >
-          {name}
-        </h3>
+          <h3 
+            className="fs-6 fw-semibold" 
+            title={name}
+            style={{ 
+              display: '-webkit-box', 
+              WebkitLineClamp: 2, 
+              WebkitBoxOrient: 'vertical', 
+              overflow: 'hidden', 
+              minHeight: "40px"
+            }}
+          >
+            {name}
+          </h3>
+        </a>
 
         {/* Price */}
         <div className="mt-1 d-flex align-items-baseline gap-2">
