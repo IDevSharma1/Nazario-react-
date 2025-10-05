@@ -13,7 +13,7 @@ function Navbar({ brand = "Nazario", onSearch }) {
           <a
             href="/"
             className="navbar-brand d-flex align-items-center gap-2 text-decoration-none"
-            style={{ color: "var(--Creme-Brulee)" }}
+            style={{ color: "var(--Lunar-Eclipse)" }}
           >
             <span className="fs-4 fw-bold m-0">{brand}</span>
           </a>
