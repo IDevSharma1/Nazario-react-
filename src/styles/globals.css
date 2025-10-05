@@ -118,3 +118,24 @@ body { padding-top: 72px; } /* Navbar height compensation (adjust if needed) */
 @media (min-width: 992px) {
   .card .d-flex.flex-column.flex-grow-1 { padding: 16px 16px !important; }
 }
+
+/* Hover effect for product card */
+.product-card-hover {
+  transition: box-shadow 0.3s cubic-bezier(.4,2,.6,1), transform 0.3s cubic-bezier(.4,2,.6,1);
+}
+.product-card-hover:hover {
+  box-shadow: 0 12px 32px rgba(0,0,0,0.13), 0 1.5px 8px rgba(0,0,0,0.07);
+  transform: translateY(-4px) scale(1.025);
+  z-index: 2;
+}
+
+/* Image zoom on hover */
+.product-card-hover:hover .product-img-link img {
+  transform: scale(1.06);
+}
+
+/* Name color change on hover */
+.product-card-hover:hover .product-name-link h3 {
+  color: var(--Inkwell, #1a1a1a);
+  text-decoration: underline;
+}

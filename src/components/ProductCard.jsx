@@ -7,7 +7,7 @@ function ProductCard({ product, onToggleLike }) {
 
   return (
     <div 
-      className="card border-0 d-flex flex-column h-100" 
+      className="card border-0 d-flex flex-column h-100 product-card-hover" 
       style={{ minHeight: "450px" }}
     >
       {/* Image Section */}
@@ -16,13 +16,14 @@ function ProductCard({ product, onToggleLike }) {
         style={{ display: "block", height: "300px", overflow: "hidden", borderRadius: "8px", position: "relative" }}
         tabIndex={0}
         aria-label={`View details for ${name}`}
+        className="product-img-link"
       >
         <img
           src={image}
           alt={name}
           loading="lazy"
           className="w-100 h-100"
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "cover", transition: "transform 0.4s cubic-bezier(.4,2,.6,1)" }}
         />
 
         {/* Badges */}
@@ -71,6 +72,7 @@ function ProductCard({ product, onToggleLike }) {
           style={{ textDecoration: "none", color: "inherit" }}
           tabIndex={0}
           aria-label={`View details for ${name}`}
+          className="product-name-link"
         >
           <h3 
             className="fs-6 fw-semibold" 
@@ -80,7 +82,8 @@ function ProductCard({ product, onToggleLike }) {
               WebkitLineClamp: 2, 
               WebkitBoxOrient: 'vertical', 
               overflow: 'hidden', 
-              minHeight: "40px"
+              minHeight: "40px",
+              transition: "color 0.3s"
             }}
           >
             {name}
