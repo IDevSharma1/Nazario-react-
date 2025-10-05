@@ -1,8 +1,8 @@
 :root {
-    --Inkwell: #FFF200;
+    --Inkwell: #203639;
     --Lunar-Eclipse: #3F4E4F;
     --Au-Lait: #FFFFFF;
-    --Creme-Brulee: #DCD7C9;
+    --Creme-Brulee: #FFF200;
     --Accent: #3F4EA4;
     --Border: rgba(0,0,0,.12);
   }
@@ -13,7 +13,7 @@ body { padding-top: 72px; } /* Navbar height compensation (adjust if needed) */
   
   html, body, #root { height: 100%; }
   body {
-    background: var(--Creme-Brulee);
+    background: var(--Au-Lait);
     color: var(--Inkwell);
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   }
