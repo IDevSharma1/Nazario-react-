@@ -122,12 +122,12 @@ function ProductCard({ product, onToggleLike }) {
         {/* Buttons (always stick bottom) */}
         <div className="mt-auto pt-2 d-grid gap-2">
           <button className="btn btn-buynow fw-bold">+ Add to Cart</button>
-          <button 
+          {/* <button 
             className="btn btn-outline-secondary fw-bold" 
             style={{ borderColor: 'rgba(32,54,57,.25)', color: 'var(--Inkwell)' }}
           >
             + Try in 3D
-          </button>
+          </button> */}
           <a 
             className="text-center small text-secondary text-decoration-none" 
             href="../pages/product-details.html"
