@@ -7,7 +7,7 @@ function Navbar({ brand = "Nazario", onSearch }) {
     <header>
       <nav
         className="navbar navbar-expand-lg navbar-light fixed-top border-bottom"
-        style={{ zIndex: 1040, background: "var(--Lunar-Eclipse)" }}
+        style={{ zIndex: 1040, background: "var(--Creme-Brulee)" }}
       >
         <div className="container">
           <a
