@@ -139,3 +139,17 @@ body { padding-top: 72px; } /* Navbar height compensation (adjust if needed) */
   color: var(--Inkwell, #1a1a1a);
   text-decoration: underline;
 }
+
+/* Make badge text always visible and bold */
+.badge-chip {
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 0.95em;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.18);
+  padding: 0.35em 0.8em;
+  border-radius: 12px;
+  background: #222 !important; /* fallback for non-promo badges */
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
